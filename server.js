@@ -7,19 +7,12 @@ const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static('public'));
+
+
+
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
+  res.send('Note Taker');
 });
 
-app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/notes.html'));
-});
-
-
-// app.get('/', (req, res) => {
-//   res.send('Note Taker');
-// });
-
-app.listen(PORT,() => console.log('running at port 3001'));
+app.listen(PORT,() => console.log('All your notes have been stored at http://localhost:${PORT}'));
