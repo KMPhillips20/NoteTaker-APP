@@ -9,10 +9,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
-
-
-app.get('/', (req, res) => {
-  res.send('Note Taker');
-});
+app.get('/', (req, res) => {res.send('Note-Taker-App2');});
 
 app.listen(PORT,() => console.log('All your notes have been stored at http://localhost:${PORT}'));
