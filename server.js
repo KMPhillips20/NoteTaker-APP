@@ -1,14 +1,26 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const PORT = process.env.PORT || 3001;
 
 const app = express();
+const PORT = process.env.PORT || 3001;
 
-app.use(express.urlencoded({ extended: false }));
+
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 
 
-app.get('/', (req, res) => {res.send('Note-Taker-App2');});
+app.get('/', (rec, res) => {
+  res.sendFile(path.join(__dirname, '/public/index.html'));
+});
 
-app.listen(PORT,() => console.log('All your notes have been stored at http://localhost:${PORT}'));
+
+app.get('/notes', (req, res) =>
+res.sendFile(path.join(__dirname, '/public/notes.html'))
+);
+
+
+
+app.listen(PORT, () => console.log('runing at port 3001'));
