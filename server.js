@@ -14,17 +14,22 @@ app.use(express.static('public'));
 
 
 app.get('/api/notes', (req,res) => {
-  fs.readFileSync('./db/db.json', 'utf8');
+  const data = fs.readFileSync('./db/db.json', 'utf8');
   const notesInfo = JSON.parse(data);
   res.json(notesInfo);
 });
 
 app.post('/api/notes', (req,res) => {
-  fs.readFileSync('./db/db.json', 'utf8');
+  const data = fs.readFileSync('./db/db.json', 'utf8');
   const notesInfo = JSON.parse(data);
-
-
-  res.json(notesInfo);
+  const stickyNote = {
+    ...req.body,
+    id:uuid4()
+  };
+  notesInfo.push(stickyNote);
+  const stringifyedNewNote = JSON.stringify(notesInfo);
+  fs.writeFileSync('./db/db.json', stringifyedNewNote);
+  res.json('Your note has been saved!');
 });
 
 // Routes 
