@@ -14,14 +14,14 @@ app.use(express.static('public'));
 
 
 app.get('/api/notes', (req,res) => {
-  const data = fs.readFileSync('./db/db.json', 'utf8');
-  const notesInfo = JSON.parse(data);
+  const dataInfo = fs.readFileSync('./db/db.json', 'utf8');
+  const notesInfo = JSON.parse(dataInfo);
   res.json(notesInfo);
 });
 
 app.post('/api/notes', (req,res) => {
-  const data = fs.readFileSync('./db/db.json', 'utf8');
-  const notesInfo = JSON.parse(data);
+  const dataInfo = fs.readFileSync('./db/db.json', 'utf8');
+  const notesInfo = JSON.parse(dataInfo);
   const stickyNote = {
     ...req.body,
     id:uuid4()
@@ -41,6 +41,16 @@ app.get('/', (req, res) => {
 // Path for Notes 
 app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+
+// how to get the notes to delete
+app.delete('/api/notes/:id', (req,res) => {
+  const dataInfo = fs.readFileSync('./db/db.json', 'utf8');
+  const notesInfo = JSON.parse(dataInfo).filter(note => note.id !== req.params.id);
+  const stringifyedNewNote = JSON.stringify(notesInfo);
+  fs.writeFileSync('./db/db.json', stringifyedNewNote);
+res.json('your note has been deleted!');
+  
 });
 
 
