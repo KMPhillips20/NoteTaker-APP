@@ -23,6 +23,12 @@ Home Screen
 
 Notes Section
 ![Notes-Section](./public/assets/images/notes_section.jpg)
+
+Notes Saved
+![Notes-Saved](./public/assets/images/saved_notes.jpg)
+
+Heroku Log
+![Heroku-Log](./public/assets/images/heroku_log.jpg)
  ***
 
  ## Links 
